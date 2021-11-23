@@ -21,6 +21,7 @@ const reducerName = ( state =[], action ) =>{
 function *watcherSaga(){
   // takeEvery also lisens for dispatch
   yield takeEvery( 'GET_THINGS', getSaga );
+  yield takeEvery( 'ADD_THING', postSaga );
 }
 // generator functions for async
 function *getSaga( action ){
@@ -34,6 +35,17 @@ function *getSaga( action ){
   } catch( err ){
     alert( 'no' );
     console.log( err );
+  }
+}
+// post test
+function *postSaga( action ){
+  console.log( 'in *postSaga', action ); 
+  try{
+    const response = axios.post( '/test', { test: action.payload } );
+    yield put( { type: 'GET_THINGS' })
+  } catch ( err ){
+    console.log( err );
+    alert( 'problem adding item' );
   }
 }
 
