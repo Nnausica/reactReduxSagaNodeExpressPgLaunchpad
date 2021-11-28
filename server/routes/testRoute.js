@@ -5,4 +5,9 @@ router.get( '/', ( req, res )=>{
     res.send( 'meow' )
 })
 
+router.post( '/', ( req, res )=>{
+    console.log( 'test POST:', req.body );
+    res.send( 'woof' )
+})
+
 module.exports = router;
